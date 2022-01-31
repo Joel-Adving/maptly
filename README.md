@@ -1,6 +1,6 @@
 # Maptly
 
-Mobile responsive app for tracking workouts on a map
+App for tracking workouts on a map
 
 # architecture / tech stack
 
