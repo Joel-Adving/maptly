@@ -2,6 +2,8 @@
 
 Mobile responsive app for tracking workouts on a map
 
+# Tech Stack
+
 Object oriented vanilla javascript
 
 Leaflet map cdn
