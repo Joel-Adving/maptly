@@ -1,6 +1,8 @@
 # Maptly
 
-Object oriented vanilla javascript project with leaflet map cdn
+Object oriented vanilla javascript
+Leaflet map cdn
+Local storage for persisting state
 
 ## Dekstop View
 
