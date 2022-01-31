@@ -1,5 +1,7 @@
 # Maptly
 
+Mobile responsive app for tracking workouts on a map
+
 Object oriented vanilla javascript
 
 Leaflet map cdn
