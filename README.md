@@ -1,7 +1,3 @@
-# maptly
-object oriented vanilla javascript project with leaflet map cdn
-
-
 # Maptly
 
 Object oriented vanilla javascript project with leaflet map cdn
