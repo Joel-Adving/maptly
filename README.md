@@ -1,7 +1,9 @@
 # Maptly
 
 Object oriented vanilla javascript
+
 Leaflet map cdn
+
 Local storage for persisting state
 
 ## Dekstop View
