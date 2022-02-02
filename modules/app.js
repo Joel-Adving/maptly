@@ -1,8 +1,16 @@
 'use strict'
-// prettier-ignore
-import {logo,form, inputType, inputDistance, inputDuration, inputCadence, inputElevation,containerWorkouts} from "../helpers/selectors.js"
 import Running from './running.js'
 import Cycling from './cycling.js'
+
+const form = document.querySelector('.form')
+const logo = document.querySelector('.logo')
+const sidebar = document.querySelector('.sidebar')
+const containerWorkouts = document.querySelector('.workouts')
+const inputType = document.querySelector('.form__input--type')
+const inputDistance = document.querySelector('.form__input--distance')
+const inputDuration = document.querySelector('.form__input--duration')
+const inputCadence = document.querySelector('.form__input--cadence')
+const inputElevation = document.querySelector('.form__input--elevation')
 
 class App {
     #map
@@ -17,6 +25,7 @@ class App {
         containerWorkouts.addEventListener('click', this._panToWorkout.bind(this))
         logo.addEventListener('click', this._clearLocalStorage.bind(this))
         this._getLocalStorage()
+        this._hideForm()
     }
 
     _dateFormatter(date) {
@@ -30,7 +39,9 @@ class App {
         const clicked = e?.target.closest('.workout')
         if (!clicked) return
         const workout = this.#workouts.find(el => el.id === clicked.dataset.id)
-        workout.click()
+        document
+            .querySelector('#map')
+            .scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
         this.#map.setView(workout.coords, 13, {
             animate: true,
             pan: { duration: 1 },
@@ -71,6 +82,16 @@ class App {
         form.classList.remove('hidden')
         inputDistance.focus()
         return this
+    }
+
+    _hideForm() {
+        sidebar.addEventListener('click', e => {
+            const clicked = e.target.closest('.form')
+            if (!clicked) {
+                form.classList.add('hidden')
+                return this
+            }
+        })
     }
 
     _fixMarkerIcon() {
@@ -188,21 +209,22 @@ class App {
                 !formValidator(distance, duration, cadance) ||
                 !isPositive(distance, duration, cadance)
             )
-                return alert('Not a valid input')
+                return
+
             workout = new Running(distance, duration, coords, cadance, type)
         }
 
         if (type === 'cycling') {
             const elevation = +inputElevation.value
             if (!formValidator(distance, duration, elevation) || !isPositive(distance, duration))
-                return alert('Not a valid input')
+                return
+
             workout = new Cycling(distance, duration, coords, elevation, type)
         }
 
         this.#workouts.push(workout)
         this._setLocalStorage()
 
-        // prettier-ignore
         inputDistance.value = inputCadence.value = inputDuration.value = inputElevation.value = ''
 
         this._renderMarkers()
