@@ -2,6 +2,8 @@
 
 App for tracking workouts on a map
 
+https://maptly.vercel.app/
+
 # architecture / tech stack
 
 Object oriented vanilla javascript
